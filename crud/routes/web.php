@@ -20,7 +20,12 @@ use App\Http\Controllers\PersonController;
 
 Route::get('/index', [PersonController::class,'index'])->name('index');
 Route::get('/create', [PersonController::class,'create'])->name('create');
-Route::get('/show/{note}', [PersonController::class,'show'])->name('show');
 Route::post('/store', [PersonController::class,'store'])->name('store');
+Route::get('/edit/{person}', [PersonController::class,'edit'])->name('edit');
+Route::put('/update/{person}', [PersonController::class,'update'])->name('update');
+Route::get('/show/{person}', [PersonController::class,'show'])->name('show');
+Route::delete('/destroy/{person}', [PersonController::class,'destroy'])->name('destroy');
 
-
+Route::get('/edit2', function () {
+    return view('edit2');
+});

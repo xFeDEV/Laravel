@@ -15,8 +15,13 @@ return new class extends Migration
             $table->id();
             $table->string('nombre');
             $table->string('apellido');
-            $table->string('documento');
-            $table->integer('edad');
+            $table->string('username');
+            $table->string('email');
+            $table->string('direccion');
+            $table->string('direccion2');
+            $table->string('pais');
+            $table->string('ciudad');
+            $table->integer('codigopostal');
             $table->timestamps();
         });
     }

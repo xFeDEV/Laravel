@@ -17,8 +17,15 @@
                 <th scope="col">Id</th>
                 <th scope="col">Nombre</th>
                 <th scope="col">Apellido</th>
-                <th scope="col">Documento</th>
-                <th scope="col">Edad</th>
+                <th scope="col">Username</th>
+                <th scope="col">Email</th>
+                <th scope="col">Direccion</th>
+                <th scope="col">Direccion2</th>
+                <th scope="col">Pais</th>
+                <th scope="col">Ciudad</th>
+                <th scope="col">Codigo Postal</th>
+                <th scope="col">Editar</th>
+                <th scope="col">Eliminar</th>
             </tr>
             </thead>
             <tbody>
@@ -27,8 +34,20 @@
                     <th scope="row">{{$person->id}}</th>
                     <td>{{$person->nombre}}</td>
                     <td>{{$person->apellido}}</td>
-                    <td>{{$person->documento}}</td>
-                    <td>{{$person->edad}}</td>
+                    <td>{{$person->username}}</td>
+                    <td>{{$person->email}}</td>
+                    <td>{{$person->direccion}}</td>
+                    <td>{{$person->direccion2}}</td>
+                    <td>{{$person->pais}}</td>
+                    <td>{{$person->ciudad}}</td>
+                    <td>{{$person->codigopostal}}</td>
+                    <td><a href="{{route('edit', $person->id)}}" class="btn btn-primary">Editar</a></td>
+                    <td><form  method="POST" action="{{route('destroy', $person->id)}}">
+                        @csrf
+                        @method('DELETE')
+                        <input class="btn btn-primary" type="submit" value="Eliminar">
+                        </form>
+                    </td>
                 </tr>
             @empty
                 <li>Lista vacia</li>

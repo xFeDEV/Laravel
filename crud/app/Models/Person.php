@@ -10,7 +10,12 @@ class Person extends Model
     protected $fillable = [
         'nombre',
         'apellido',
-        'documento',
-        'edad',
+        'username',
+        'email',
+        'direccion',
+        'direccion2',
+        'pais',
+        'ciudad',
+        'codigopostal',
     ];
 }

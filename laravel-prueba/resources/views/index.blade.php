@@ -43,9 +43,9 @@
 
             {{$note->title}}
             {{$note->drescription}}
-           {{--  <a href="{{route('show', $note->id)}}"{{$note->title}}></a> --}}
-            {{-- <a href="{{route('edit', $note->id)}}">Editar</a>
-
+            <a href="{{route('show', $note->id)}}"{{$note->title}}></a>
+            <a href="{{route('edit', $note->id)}}">Editar</a>
+{{-- 
             <form action="{{route('destroy', $nota->id)}}" method="POST">
                 @csrt
             </form> --}}

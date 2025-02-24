@@ -21,8 +21,11 @@ use App\Http\Controllers\NoteController;
 
 Route::get('/index', [NoteController::class,'index'])->name('index');
 Route::get('/create', [NoteController::class,'create'])->name('create');
-Route::get('/show/{note}', [NoteController::class,'show'])->name('show');
 Route::post('/store', [NoteController::class,'store'])->name('store');
+Route::get('/edit/{note}', [NoteController::class,'edit'])->name('edit');
+Route::put('/update/{note}', [NoteController::class,'update'])->name('update');
+Route::get('/show/{note}', [NoteController::class,'show'])->name('show');
+
 
 /* Route::view('/about','landing.about')->name('about');
 Route::view('/arquitectura','landing.arquitectura')->name('arquitectura');

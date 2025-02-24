@@ -30,6 +30,12 @@ class PersonController extends Controller
         return redirect()->route('index');
     }
 
+
+    public function edit(Person $person)
+    {
+        return view('edit', compact('person'));
+    }
+
     /**
      * Display the specified resource.
      */
@@ -41,16 +47,25 @@ class PersonController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Person $person)
     {
-        //
+        $person->update($request->all());
+        return redirect()->route('index')->with('success', 'Nota actualizada con éxito');
+
+        /* return redirect()->route('index')->with('success', 'Nota actualizada');
+        $note = Note::find($note);
+        $note->title = $request->title;
+        $note->drescription = $request->drescription;
+        $
+ */
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Request $request, Person $person)
     {
-        //
+        $person->delete();
+        return redirect()->route('index');
     }
 }

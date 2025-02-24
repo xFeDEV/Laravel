@@ -17,11 +17,26 @@
         <input type="text" name="apellido">
         {{-- @error('drescription')
         <p style="color:red;">{{$message}}</p> --}}
-        <label>Documento</label>
-        <input type="text" name="documento">
+        <label>Username</label>
+        <input type="text" name="username">
 
-        <label>Edad</label>
-        <input type="text" name="edad">
+        <label>Email</label>
+        <input type="text" name="email">
+
+        <label>Direccion</label>
+        <input type="text" name="direccion">
+
+        <label>Direccion 2</label>
+        <input type="text" name="direccion2">
+
+        <label>Pais</label>
+        <input type="text" name="pais">
+
+        <label>Ciudad</label>
+        <input type="text" name="ciudad">
+
+        <label>Codigo Postal</label>
+        <input type="number" name="codigopostal">
         
         <input type="submit" value="create">
     </form>    
