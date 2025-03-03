@@ -8,6 +8,19 @@
     <title>Lista personas</title>
  </head>
  <body class="text-center m-3">
+
+    @if($message = Session::get('success'))
+        <div style="padding: 15px; background-color: green; color:white;">
+            <p>{{$message}}</p>
+        </div>
+    @endif
+
+    @if($message = Session::get('danger'))
+        <div style="padding: 15px; background-color: red; color:white;">
+            <p>{{$message}}</p>
+        </div>
+    @endif
+
     <a href="{{route('create')}}" class="btn btn-primary m-3">Crear nueva persona</a>
     <h1 class="mb-3">Listado</h1>
     <div class="container-sm">
@@ -26,6 +39,7 @@
                 <th scope="col">Codigo Postal</th>
                 <th scope="col">Editar</th>
                 <th scope="col">Eliminar</th>
+                <th scope="col">Mostrar</th>
             </tr>
             </thead>
             <tbody>
@@ -34,7 +48,7 @@
                     <th scope="row">{{$person->id}}</th>
                     <td>{{$person->nombre}}</td>
                     <td>{{$person->apellido}}</td>
-                    <td>{{$person->username}}</td>
+                    <td>{{$person->username}}</td>  
                     <td>{{$person->email}}</td>
                     <td>{{$person->direccion}}</td>
                     <td>{{$person->direccion2}}</td>
@@ -48,6 +62,7 @@
                         <input class="btn btn-primary" type="submit" value="Eliminar">
                         </form>
                     </td>
+                    <td><a href="{{route('show', $person->id)}}">Ver</a></td>
                 </tr>
             @empty
                 <li>Lista vacia</li>

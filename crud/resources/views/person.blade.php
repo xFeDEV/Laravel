@@ -11,14 +11,19 @@
         @csrf
         <label>Nombre:</label>
         <input type="text" name="nombre">
-        {{-- @error('title')
-            <p style="colore"></p> --}}
+        @error('nombre')
+            <p style="color:red;">{{$message}}</p>
+        @enderror
         <label>Apellido</label>
         <input type="text" name="apellido">
-        {{-- @error('drescription')
-        <p style="color:red;">{{$message}}</p> --}}
+        @error('apellido')
+            <p style="color:red;">{{$message}}</p>
+        @enderror
         <label>Username</label>
         <input type="text" name="username">
+        @error('username')
+            <p style="color:red;">{{$message}}</p>
+        @enderror
 
         <label>Email</label>
         <input type="text" name="email">

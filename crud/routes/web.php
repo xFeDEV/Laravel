@@ -29,3 +29,12 @@ Route::delete('/destroy/{person}', [PersonController::class,'destroy'])->name('d
 Route::get('/edit2', function () {
     return view('edit2');
 });
+Route::middleware([
+    'auth:sanctum',
+    config('jetstream.auth_session'),
+    'verified',
+])->group(function () {
+    Route::get('/dashboard', function () {
+        return view('dashboard');
+    })->name('dashboard');
+});

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\PersonRequest;
 use Illuminate\Http\Request;
 use App\Models\Person;
 
@@ -24,10 +25,11 @@ class PersonController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(PersonRequest $request)
     {
         Person::create($request->all());
-        return redirect()->route('index');
+        /* return redirect()->route('index'); */
+        return redirect()->route('index')->with('success', 'Persona fue ingresada');
     }
 
 
@@ -39,18 +41,18 @@ class PersonController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Person $person)
     {
-        //
+        return view('show', compact('person'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Person $person)
+    public function update(PersonRequest $request, Person $person)
     {
         $person->update($request->all());
-        return redirect()->route('index')->with('success', 'Nota actualizada con éxito');
+        return redirect()->route('index')->with('success', 'Persona actualizada con éxito');
 
         /* return redirect()->route('index')->with('success', 'Nota actualizada');
         $note = Note::find($note);
@@ -63,9 +65,9 @@ class PersonController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Request $request, Person $person)
+    public function destroy(PersonRequest $request, Person $person)
     {
         $person->delete();
-        return redirect()->route('index');
+        return redirect()->route('index')->with('danger', 'Nota eliminada');
     }
 }
