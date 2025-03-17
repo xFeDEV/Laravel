@@ -33,6 +33,7 @@ class PatientRequest extends FormRequest
     {
         return[
             'documento.required' => 'el documento es requerido',
+            'documento.min' => 'el minimo de car',
             'nombre.required' => 'el nombre es requerido',
             'email.required' => 'el email es requerido',
             'direccion.required' => 'el direccion es requerido',

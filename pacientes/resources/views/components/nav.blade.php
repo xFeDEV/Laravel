@@ -4,7 +4,7 @@
         <img src="{{ asset('img/logo.png') }}" alt="Logo" class="d-inline-block align-text-top">
       </a>
       <span class="navbar-text">
-        <a href="{{route('create')}}" class="navbar-brand border border-3 rounded p-3">Crear paciente</a>
+        <a href="{{route('create')}}" ">Crear paciente</a>
       </span>
     </div>
   </nav>
