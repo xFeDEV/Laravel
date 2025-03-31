@@ -18,8 +18,6 @@ use App\Http\Controllers\RoleController;
 
 Route::get('/users', [UserController::class, 'index'])->name('users.index');
 
-
-
 Route::prefix('users')->name('users.')->group(function () {
     Route::get('/', [UserController::class, 'index'])->name('index');
     Route::get('/create', [UserController::class, 'create'])->name('create');
@@ -36,4 +34,6 @@ Route::prefix('roles')->name('roles.')->group(function () {
     Route::get('/{role}/edit', [RoleController::class, 'edit'])->name('edit');
     Route::put('/{role}', [RoleController::class, 'update'])->name('update');
     Route::delete('/{role}', [RoleController::class, 'destroy'])->name('destroy');
+     // Nueva ruta para ver los usuarios con el rol asignado
+     Route::get('/{role}/users', [RoleController::class, 'showUsers'])->name('users');
 });

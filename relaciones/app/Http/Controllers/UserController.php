@@ -27,20 +27,45 @@ class UserController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
-    {
-        $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => bcrypt($request->password),
-        ]);
+{
+    // Validación de los datos
+    $request->validate([
+        'name' => 'required|string|max:255',
+        'email' => 'required|email|unique:users,email|max:255',
+        'password' => 'required|string|min:8|confirmed',
+        'roles' => 'array', // Asegura que roles sea un array
+        'roles.*' => 'exists:roles,id' // Verifica que los IDs de roles existen
+    ], [
+        'name.required' => 'El nombre es obligatorio.',
+        'name.string' => 'El nombre debe ser una cadena de texto.',
+        'name.max' => 'El nombre no puede superar los 255 caracteres.',
+        'email.required' => 'El correo electrónico es obligatorio.',
+        'email.email' => 'Debe ingresar un correo electrónico válido.',
+        'email.unique' => 'El correo electrónico ya está registrado.',
+        'email.max' => 'El correo no puede superar los 255 caracteres.',
+        'password.required' => 'La contraseña es obligatoria.',
+        'password.string' => 'La contraseña debe ser una cadena de texto.',
+        'password.min' => 'La contraseña debe tener al menos 8 caracteres.',
+        'password.confirmed' => 'Las contraseñas no coinciden.',
+        'roles.array' => 'El formato de los roles no es válido.',
+        'roles.*.exists' => 'Uno o más roles seleccionados no existen.'
+    ]);
 
-        // Si se seleccionan roles, asignarlos al usuario
-        if ($request->has('roles')) {
-            $user->roles()->sync($request->roles);
-        }
+    // Creación del usuario
+    $user = User::create([
+        'name' => $request->name,
+        'email' => $request->email,
+        'password' => bcrypt($request->password),
+    ]);
 
-        return redirect()->route('users.index')->with('success', 'Usuario creado correctamente');
+    // Si se seleccionan roles, asignarlos al usuario
+    if ($request->has('roles')) {
+        $user->roles()->sync($request->roles);
     }
+
+    return redirect()->route('users.index')->with('success', 'Usuario creado correctamente.');
+}
+
 
     /**
      * Display the specified resource.

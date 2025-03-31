@@ -29,6 +29,7 @@
                         <td>{{ $rol->name }}</td>
                         <td>
                             <a href="{{ route('roles.edit', $rol->id) }}" class="btn btn-warning btn-sm">Editar</a>
+                            <a href="{{ route('roles.users', $rol->id) }}" class="btn btn-info btn-sm">Usuarios</a>
                             <form action="{{ route('roles.destroy', $rol->id) }}" method="POST" style="display:inline;">
                                 @csrf
                                 @method('DELETE')
