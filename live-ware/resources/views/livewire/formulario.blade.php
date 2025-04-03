@@ -7,7 +7,7 @@
                 <x-input-error for="title"/>
             </div>
             <div>
-                <x-lavel>Contenido</x-lavel>
+                <x-label>Contenido</x-label> <!-- Cambié x-lavel a x-label -->
                 <x-textarea class="w-full" wire:model="content"></x-textarea>
                 <x-input-error for="content"/>
                 <div>
