@@ -41,47 +41,42 @@ class Formulario extends Component
     }
 
     public function save()
-    {
-        // Validar datos antes de guardar
-        
-        $post = Post::create([
-            'category_id' => $this->postCreate['category_id'],
-            'title' => $this->postCreate['title'],
-            'content' => $this->postCreate['content'],
-        ]);
-        
-        // Solo adjuntar tags si hay alguno seleccionado
-        if (!empty($this->postCreate['tags'])) {
-            $post->tags()->attach($this->postCreate['tags']);
-        }
-        
-        $this->postCreate = [
-            'title' => '',
-            'content' => '',
-            'category_id' => '',
-            'tags' => []
-        ];
-        
-        $this->posts = Post::all();
-    }
+{
+    $validated = $this->validate([
+        'postCreate.title' => 'required|string',
+        'postCreate.content' => 'required|string',
+        'postCreate.category_id' => 'required|exists:categories,id',
+        'selectedTags' => 'array',
+    ]);
 
+    $post = Post::create([
+        'title' => $this->postCreate['title'],
+        'content' => $this->postCreate['content'],
+        'category_id' => $this->postCreate['category_id'],
+    ]);
 
-    public function edit($postId)
-    {
-     
-        $this->open = true;
+    $post->tags()->attach($this->selectedTags);
 
-        $this->postEditId = $postId;
+    $this->reset('postCreate', 'selectedTags');
+    $this->posts = Post::all();
+}
 
-        $post = Post::find($postId);
+public function edit($postId)
+{
+    $this->postEditId = $postId;
 
-        $this->postEdit['category_id'] = $post->category_id;
-        $this->postEdit['title'] = $post->title;
-        $this->postEdit['content'] = $post->content;
+    $post = Post::with('tags')->find($postId);
 
-        $this->postEdit['tags'] = $post->tags->plunck('id')->toArray();
+    $this->postEdit = [
+        'title' => $post->title,
+        'content' => $post->content,
+        'category_id' => $post->category_id,
+        'tags' => $post->tags->pluck('id')->toArray(),
+    ];
 
-    }
+    $this->open = true;
+}
+
 
     public function update(){
         $post = Post::find($this->postEditId);
