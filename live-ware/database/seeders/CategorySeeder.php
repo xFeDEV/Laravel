@@ -12,13 +12,12 @@ class CategorySeeder extends Seeder
      */
     public function run(): void
     {
-        // Insertar categorías de ejemplo
         DB::table('categories')->insert([
-            ['name' => 'Technology'],
-            ['name' => 'Health'],
-            ['name' => 'Lifestyle'],
-            ['name' => 'Business'],
-            ['name' => 'Entertainment'],
+            ['name' => 'Tecnología', 'created_at' => now(), 'updated_at' => now()],
+            ['name' => 'Cocina', 'created_at' => now(), 'updated_at' => now()],
+            ['name' => 'Salud', 'created_at' => now(), 'updated_at' => now()],
+            ['name' => 'Educación', 'created_at' => now(), 'updated_at' => now()],
+            ['name' => 'Entretenimiento', 'created_at' => now(), 'updated_at' => now()],
         ]);
     }
 }

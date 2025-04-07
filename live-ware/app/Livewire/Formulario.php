@@ -40,18 +40,31 @@ class Formulario extends Component
         $this->posts = Post::all();
     }
 
-    public function save(){
-
-        $post=Post::create(
-            $this->only('category_id','title','content')
-        );
-
-        $post->tags()->attach($this->selectedTags);
-
-        $this->reset(['category_id','title','content', 'selectedTags']);
+    public function save()
+    {
+        // Validar datos antes de guardar
+        
+        $post = Post::create([
+            'category_id' => $this->postCreate['category_id'],
+            'title' => $this->postCreate['title'],
+            'content' => $this->postCreate['content'],
+        ]);
+        
+        // Solo adjuntar tags si hay alguno seleccionado
+        if (!empty($this->postCreate['tags'])) {
+            $post->tags()->attach($this->postCreate['tags']);
+        }
+        
+        $this->postCreate = [
+            'title' => '',
+            'content' => '',
+            'category_id' => '',
+            'tags' => []
+        ];
+        
         $this->posts = Post::all();
-
     }
+
 
     public function edit($postId)
     {

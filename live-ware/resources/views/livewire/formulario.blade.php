@@ -12,12 +12,9 @@
                 <x-input-error for="content"/>
                 <div>
                     <x-label>Categoria</x-label>
-                    <x-select class="w-full" wire:model="category_id">
-                        <option value="" disabled>Seleccione una categoria</option>
-                        @foreach ($categories as $category)
-                            <option value="{{$category->id}}">{{$category->name}}</option>
-                        @endforeach
-                    </x-select>
+                    <x-select wire:model="postCreate.category_id" :options="$categories->pluck('name', 'id')->toArray()">
+    <option value="">Selecciona una categoría</option>
+</x-select>
                     <x-input-error for="category_id"/>
                     <div class="mb-4">
                         <x-label>Etiquetas</x-label>
