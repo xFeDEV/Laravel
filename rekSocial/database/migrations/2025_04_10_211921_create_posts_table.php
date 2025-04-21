@@ -17,6 +17,7 @@ return new class extends Migration
             $table->unsignedBigInteger('category_id')->nullable(); // <- aquí el fix
             $table->string('title');
             $table->text('content');
+            $table->string('image_url')->nullable(); // <- esta es la línea nueva
             $table->timestamps();
     
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');

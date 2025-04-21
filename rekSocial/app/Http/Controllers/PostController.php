@@ -28,14 +28,17 @@ class PostController extends Controller
             'title' => 'required|string|max:255',
             'content' => 'required',
             'category_id' => 'required|exists:categories,id',
-            'tags' => 'array|exists:tags,id'
+            'tags' => 'array|exists:tags,id',
+            'image_url' => 'nullable|url|max:2048'
         ]);
 
         $post = Post::create([
             'user_id' => auth()->id(),
             'title' => $request->title,
             'content' => $request->content,
-            'category_id' => $request->category_id
+            'category_id' => $request->category_id,
+            'image_url' => $request->image_url
+
         ]);
 
         $post->tags()->attach($request->tags);
@@ -70,13 +73,16 @@ class PostController extends Controller
             'title' => 'required|string|max:255',
             'content' => 'required',
             'category_id' => 'required|exists:categories,id',
-            'tags' => 'array|exists:tags,id'
+            'tags' => 'array|exists:tags,id',
+            'image_url' => 'nullable|url|max:2048'
+
         ]);
 
         $post->update([
             'title' => $request->title,
             'content' => $request->content,
-            'category_id' => $request->category_id
+            'category_id' => $request->category_id,
+            'image_url' => $request->image_url
         ]);
 
         $post->tags()->sync($request->tags);
@@ -94,4 +100,10 @@ class PostController extends Controller
 
         return redirect()->route('posts.index')->with('success', 'Post eliminado.');
     }
+
+    public function myPosts()
+{
+    $posts = Post::where('user_id', auth()->id())->latest()->paginate(10);
+    return view('posts.my_posts', compact('posts'));
+}
 }

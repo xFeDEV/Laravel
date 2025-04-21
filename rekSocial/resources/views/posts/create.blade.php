@@ -29,6 +29,13 @@
                     <input type="text" name="title" class="form-control" value="{{ old('title') }}" required>
                 </div>
 
+                {{-- URL de la imagen (opcional) --}}
+                <div class="form-group">
+                    <label for="image_url">URL de la imagen (opcional)</label>
+                    <input type="text" name="image_url" class="form-control" value="{{ old('image_url') }}">
+                </div>
+
+
                 {{-- Contenido --}}
                 <div class="form-group">
                     <label for="content">Contenido</label>

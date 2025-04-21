@@ -2,25 +2,28 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-
 use App\Models\Post;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class LikeController extends Controller
 {
-    public function toggle(Request $request, Post $post)
-{
-    $user = auth()->user();
-
-    $like = $post->likes()->where('user_id', $user->id)->first();
-
-    if ($like) {
-        $like->delete();
-        return response()->json(['liked' => false]);
-    } else {
-        $post->likes()->create(['user_id' => $user->id]);
-        return response()->json(['liked' => true]);
+    public function __construct()
+    {
+        $this->middleware('auth'); // Aseguramos que solo usuarios autenticados puedan dar like
     }
-}
 
+    public function like(Post $post)
+    {
+        if (!$post->likedBy(Auth::user())) {
+            $post->likes()->create(['user_id' => Auth::id()]);
+        }
+        return back(); // Redirigimos a la página anterior
+    }
+
+    public function unlike(Post $post)
+    {
+        $post->likes()->where('user_id', Auth::id())->delete();
+        return back(); // Redirigimos a la página anterior
+    }
 }
